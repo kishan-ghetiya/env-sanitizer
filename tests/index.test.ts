@@ -87,6 +87,30 @@ describe("sanitizeEnv", () => {
     expect(config.ARRAY_VAR).toEqual(["one", "two", "three"]);
   });
 
+  // Test for Date parsing
+  it("should parse Date variable", () => {
+    process.env.LAUNCH_DATE = "2025-04-01T00:00:00Z";
+
+    const schema: EnvSchema<{ LAUNCH_DATE: Date }> = {
+      LAUNCH_DATE: { type: "date" as EnvType, required: true },
+    };
+
+    const config = sanitizeEnv(schema);
+    expect(config.LAUNCH_DATE).toEqual(new Date("2025-04-01T00:00:00Z"));
+  });
+
+  // Test for URL parsing
+  it("should parse URL variable", () => {
+    process.env.API_URL = "https://api.example.com";
+
+    const schema: EnvSchema<{ API_URL: URL }> = {
+      API_URL: { type: "url" as EnvType, required: true },
+    };
+
+    const config = sanitizeEnv(schema);
+    expect(config.API_URL).toEqual(new URL("https://api.example.com"));
+  });
+
   // Test for passing validation if value is valid
   it("should pass validation if value is valid", () => {
     process.env.VALID_VAR = "valid@example.com";
@@ -118,5 +142,52 @@ describe("sanitizeEnv", () => {
     expect(() => sanitizeEnv(schema)).toThrow(
       "Validation failed for environment variable: INVALID_VAR"
     );
+  });
+
+  // Test for email validation
+  it("should pass email validation", () => {
+    process.env.EMAIL_VAR = "valid@example.com";
+
+    const schema: EnvSchema<{ EMAIL_VAR: string }> = {
+      EMAIL_VAR: {
+        type: "string" as EnvType,
+        required: true,
+        validator: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+      },
+    };
+
+    const config = sanitizeEnv(schema);
+    expect(config.EMAIL_VAR).toBe("valid@example.com");
+  });
+
+  // Test for UUID validation
+  it("should validate UUID format", () => {
+    process.env.UUID_VAR = "123e4567-e89b-12d3-a456-426614174000";
+
+    const schema: EnvSchema<{ UUID_VAR: string }> = {
+      UUID_VAR: {
+        type: "string" as EnvType,
+        required: true,
+        validator: (val) =>
+          /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(
+            val
+          ),
+      },
+    };
+
+    const config = sanitizeEnv(schema);
+    expect(config.UUID_VAR).toBe("123e4567-e89b-12d3-a456-426614174000");
+  });
+
+  // Test for BigInt parsing
+  it("should parse BigInt correctly", () => {
+    process.env.BIG_INT_VAR = "9007199254740991";
+
+    const schema: EnvSchema<{ BIG_INT_VAR: BigInt }> = {
+      BIG_INT_VAR: { type: "bigint" as EnvType, required: true },
+    };
+
+    const config = sanitizeEnv(schema);
+    expect(config.BIG_INT_VAR).toEqual(BigInt("9007199254740991"));
   });
 });

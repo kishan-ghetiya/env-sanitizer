@@ -7,12 +7,16 @@ const schema: EnvSchema<{
   ENABLE_FEATURE: boolean;
   CONFIG: object; // For JSON type
   USERS: string[]; // For array type
+  LAUNCH_DATE: Date; // For date type
+  API_URL: URL; // For URL type
 }> = {
   PORT: { type: "number" as EnvType, required: true },
   NODE_ENV: { type: "string" as EnvType, default: "production" },
   ENABLE_FEATURE: { type: "boolean" as EnvType, default: false },
-  CONFIG: { type: "json" as EnvType, default: {} }, // Default empty JSON object
-  USERS: { type: "array" as EnvType, default: [] }, // Default empty array
+  CONFIG: { type: "json" as EnvType, default: {} },
+  USERS: { type: "array" as EnvType, default: [] },
+  LAUNCH_DATE: { type: "date", required: true },
+  API_URL: { type: "url", required: true },
 };
 
 // Load and sanitize the environment variables
