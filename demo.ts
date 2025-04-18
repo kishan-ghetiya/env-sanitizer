@@ -31,6 +31,8 @@ Output example:
   NODE_ENV: "development",
   ENABLE_FEATURE: true,
   CONFIG: { apiUrl: "https://api.example.com", timeout: 5000 },
-  USERS: ["john", "jane", "alice"]
+  USERS: ["john", "jane", "alice"],
+  LAUNCH_DATE: new Date("2025-04-30"),
+  API_URL: new URL("https://api.example.com")
 }
 */
