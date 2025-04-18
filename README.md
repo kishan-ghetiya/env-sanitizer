@@ -14,10 +14,11 @@ npm install env-sanitizer
 ## Features
 
 - **Validation:** Ensure your environment variables meet specific conditions (e.g., required fields, valid types).
-- **Sanitization:** Cast values to the expected types (e.g., string, number, boolean, JSON).
+- **Sanitization:** Cast values to the expected types (e.g., string, number, boolean, JSON, array, date, URL, BigInt, UUID).
 - **Default Values:** Provide default values if the environment variable is missing.
 - **Error Handling:** Throw descriptive errors when a variable is missing or invalid.
-  
+- **Custom Validators:** Easily create custom validation logic for any environment variable.
+
 ## Usage
 
 ### 1. Set up your `.env` file
@@ -28,6 +29,10 @@ Create a `.env` file in the root of your project with some environment variables
 STRING_VAR=hello
 NUMBER_VAR=123
 BOOLEAN_VAR=true
+CONFIG={"key":"value"}
+USERS=one,two,three
+LAUNCH_DATE=2025-04-30
+API_URL=https://api.example.com
 ```
 
 ### 2. Define your schema
@@ -41,10 +46,18 @@ const schema: EnvSchema<{
   STRING_VAR: string;
   NUMBER_VAR: number;
   BOOLEAN_VAR: boolean;
+  CONFIG: object;
+  USERS: string[];
+  LAUNCH_DATE: Date;
+  API_URL: URL;
 }> = {
   STRING_VAR: { type: "string" as EnvType, required: true },
   NUMBER_VAR: { type: "number" as EnvType, required: true },
   BOOLEAN_VAR: { type: "boolean" as EnvType, required: true },
+  CONFIG: { type: "json" as EnvType, required: true },
+  USERS: { type: "array" as EnvType, required: true },
+  LAUNCH_DATE: { type: "date" as EnvType, required: true },
+  API_URL: { type: "url" as EnvType, required: true },
 };
 
 const config = sanitizeEnv(schema);
@@ -52,6 +65,10 @@ const config = sanitizeEnv(schema);
 console.log(config.STRING_VAR); // "hello"
 console.log(config.NUMBER_VAR); // 123
 console.log(config.BOOLEAN_VAR); // true
+console.log(config.CONFIG); // { key: "value" }
+console.log(config.USERS); // ["one", "two", "three"]
+console.log(config.LAUNCH_DATE); // Date object
+console.log(config.API_URL); // URL object
 ```
 
 ### 3. Handle Missing or Invalid Variables
@@ -104,6 +121,35 @@ try {
 }
 ```
 
+### 6. Support for New Types
+
+In addition to basic types such as `string`, `number`, and `boolean`, `env-sanitizer` now supports the following advanced types:
+
+- **JSON:** Automatically parse environment variables as JSON objects.
+- **Array:** Parse environment variables as arrays (e.g., comma-separated values).
+- **Date:** Convert environment variables to `Date` objects.
+- **URL:** Parse environment variables as `URL` objects.
+- **BigInt:** Parse environment variables as `BigInt` values.
+- **UUID:** Parse environment variables as UUIDs (using regex validation).
+
+```typescript
+const schema: EnvSchema<{
+  DATE_VAR: Date;
+  BIGINT_VAR: BigInt;
+  UUID_VAR: string;
+}> = {
+  DATE_VAR: { type: "date" as EnvType, required: true },
+  BIGINT_VAR: { type: "bigint" as EnvType, required: true },
+  UUID_VAR: { type: "uuid" as EnvType, required: true },
+};
+
+const config = sanitizeEnv(schema);
+
+console.log(config.DATE_VAR); // Date object
+console.log(config.BIGINT_VAR); // BigInt object
+console.log(config.UUID_VAR); // UUID string
+```
+
 ## API
 
 ### `sanitizeEnv<T>(schema: EnvSchema<T>): T`
@@ -118,7 +164,7 @@ try {
 
 A schema object used to define the validation rules for your environment variables. It has the following properties:
 
-- `type`: The expected type of the environment variable (e.g., `"string"`, `"number"`, `"boolean"`, `"json"`, `"array"`).
+- `type`: The expected type of the environment variable (e.g., `"string"`, `"number"`, `"boolean"`, `"json"`, `"array"`, `"date"`, `"url"`, `"bigint"`, `"uuid"`).
 - `required` (optional): Whether the environment variable is required.
 - `default` (optional): The default value to use if the environment variable is missing.
 - `validator` (optional): A custom validation function for the environment variable.
@@ -132,6 +178,10 @@ An enum defining the possible types for environment variables:
 - `"boolean"`
 - `"json"`
 - `"array"`
+- `"date"`
+- `"url"`
+- `"bigint"`
+- `"uuid"`
 
 ## Contributing
 
@@ -143,5 +193,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-Kishan Ghetiya  
-[GitHub](https://github.com/KishanGhetiya)
+Kishan Ghetiya - [GitHub](https://github.com/KishanGhetiya)
