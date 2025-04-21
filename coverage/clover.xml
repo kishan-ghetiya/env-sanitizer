@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1745236701563" clover="3.2.0">
-  <project timestamp="1745236701563" name="All files">
+<coverage generated="1745237780905" clover="3.2.0">
+  <project timestamp="1745237780905" name="All files">
     <metrics statements="68" coveredstatements="48" conditionals="31" coveredconditionals="23" methods="3" coveredmethods="3" elements="102" coveredelements="74" complexity="0" loc="68" ncloc="68" packages="1" files="1" classes="1"/>
     <file name="index.ts" path="/Users/kishanpatel/Documents/workspace/code/env-sanitizer/src/index.ts">
       <metrics statements="68" coveredstatements="48" conditionals="31" coveredconditionals="23" methods="3" coveredmethods="3"/>
