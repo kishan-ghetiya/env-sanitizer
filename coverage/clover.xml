@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1745236701563" clover="3.2.0">
+  <project timestamp="1745236701563" name="All files">
+    <metrics statements="68" coveredstatements="48" conditionals="31" coveredconditionals="23" methods="3" coveredmethods="3" elements="102" coveredelements="74" complexity="0" loc="68" ncloc="68" packages="1" files="1" classes="1"/>
+    <file name="index.ts" path="/Users/kishanpatel/Documents/workspace/code/env-sanitizer/src/index.ts">
+      <metrics statements="68" coveredstatements="48" conditionals="31" coveredconditionals="23" methods="3" coveredmethods="3"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="33" count="16" type="stmt"/>
+      <line num="35" count="16" type="stmt"/>
+      <line num="36" count="18" type="stmt"/>
+      <line num="37" count="18" type="stmt"/>
+      <line num="41" count="18" type="cond" truecount="5" falsecount="0"/>
+      <line num="42" count="2" type="cond" truecount="3" falsecount="0"/>
+      <line num="43" count="1" type="stmt"/>
+      <line num="47" count="1" type="stmt"/>
+      <line num="49" count="16" type="cond" truecount="11" falsecount="4"/>
+      <line num="51" count="5" type="stmt"/>
+      <line num="52" count="5" type="stmt"/>
+      <line num="55" count="2" type="stmt"/>
+      <line num="56" count="2" type="cond" truecount="1" falsecount="0"/>
+      <line num="57" count="1" type="stmt"/>
+      <line num="61" count="1" type="stmt"/>
+      <line num="62" count="1" type="stmt"/>
+      <line num="65" count="1" type="stmt"/>
+      <line num="66" count="1" type="stmt"/>
+      <line num="69" count="1" type="stmt"/>
+      <line num="70" count="1" type="stmt"/>
+      <line num="72" count="0" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="79" count="3" type="stmt"/>
+      <line num="80" count="1" type="stmt"/>
+      <line num="83" count="1" type="stmt"/>
+      <line num="84" count="1" type="cond" truecount="0" falsecount="1"/>
+      <line num="85" count="0" type="stmt"/>
+      <line num="89" count="1" type="stmt"/>
+      <line num="92" count="0" type="stmt"/>
+      <line num="93" count="0" type="stmt"/>
+      <line num="95" count="0" type="stmt"/>
+      <line num="99" count="0" type="stmt"/>
+      <line num="102" count="1" type="stmt"/>
+      <line num="103" count="1" type="stmt"/>
+      <line num="105" count="0" type="stmt"/>
+      <line num="109" count="1" type="stmt"/>
+      <line num="112" count="0" type="stmt"/>
+      <line num="113" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="114" count="0" type="stmt"/>
+      <line num="118" count="0" type="stmt"/>
+      <line num="119" count="0" type="stmt"/>
+      <line num="123" count="0" type="stmt"/>
+      <line num="124" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="125" count="0" type="stmt"/>
+      <line num="129" count="0" type="stmt"/>
+      <line num="130" count="0" type="stmt"/>
+      <line num="133" count="1" type="stmt"/>
+      <line num="134" count="1" type="stmt"/>
+      <line num="136" count="0" type="stmt"/>
+      <line num="142" count="1" type="stmt"/>
+      <line num="145" count="1" type="stmt"/>
+      <line num="146" count="1" type="stmt"/>
+      <line num="147" count="1" type="stmt"/>
+      <line num="150" count="1" type="stmt"/>
+      <line num="151" count="1" type="cond" truecount="0" falsecount="1"/>
+      <line num="152" count="0" type="stmt"/>
+      <line num="156" count="1" type="stmt"/>
+      <line num="157" count="1" type="stmt"/>
+      <line num="160" count="3" type="stmt"/>
+      <line num="161" count="1" type="stmt"/>
+      <line num="164" count="0" type="stmt"/>
+      <line num="168" count="16" type="cond" truecount="3" falsecount="0"/>
+      <line num="169" count="1" type="stmt"/>
+      <line num="174" count="15" type="stmt"/>
+      <line num="177" count="13" type="stmt"/>
+    </file>
+  </project>
+</coverage>

@@ -179,6 +179,19 @@ describe("sanitizeEnv", () => {
     expect(config.UUID_VAR).toBe("123e4567-e89b-12d3-a456-426614174000");
   });
 
+  // Test for regex parsing
+  it("should parse regex variable", () => {
+    process.env.REGEX_VAR = "^hello.*";
+
+    const schema: EnvSchema<{ REGEX_VAR: RegExp }> = {
+      REGEX_VAR: { type: "regex" as EnvType, required: true },
+    };
+
+    const config = sanitizeEnv(schema);
+    expect(config.REGEX_VAR).toBeInstanceOf(RegExp);
+    expect(config.REGEX_VAR.test("hello world")).toBe(true);
+  });
+
   // Test for BigInt parsing
   it("should parse BigInt correctly", () => {
     process.env.BIG_INT_VAR = "9007199254740991";
@@ -190,4 +203,29 @@ describe("sanitizeEnv", () => {
     const config = sanitizeEnv(schema);
     expect(config.BIG_INT_VAR).toEqual(BigInt("9007199254740991"));
   });
+
+  // Test for hex parsing
+  it("should parse hex variable", () => {
+    process.env.HEX_VAR = "1a";
+
+    const schema: EnvSchema<{ HEX_VAR: number }> = {
+      HEX_VAR: { type: "hex" as EnvType, required: true },
+    };
+
+    const config = sanitizeEnv(schema);
+    expect(config.HEX_VAR).toBe(26); // 0x1a = 26
+  });
+
+  // Test for csv parsing
+  it("should parse csv variable", () => {
+    process.env.CSV_VAR = "apple,banana,cherry";
+  
+    const schema: EnvSchema<{ CSV_VAR: string[] }> = {
+      CSV_VAR: { type: "csv" as EnvType, required: true },
+    };
+  
+    const config = sanitizeEnv(schema);
+    expect(config.CSV_VAR).toEqual(["apple", "banana", "cherry"]);
+  });
+  
 });
