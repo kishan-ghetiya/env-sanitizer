@@ -5,9 +5,8 @@
 
 [![NPM version](https://img.shields.io/npm/v/env-sanitizer.svg?style=flat)](https://www.npmjs.com/package/env-sanitizer)
 [![TypeScript](https://badgen.net/npm/types/env-sanitizer)](http://www.typescriptlang.org/)
-[![Coverage Status](https://coveralls.io/repos/github/evanshortiss/env-sanitizer/badge.svg?branch=master)](https://coveralls.io/github/evanshortiss/env-sanitizer?branch=master)
 [![npm downloads](https://img.shields.io/npm/dm/env-sanitizer.svg?style=flat)](https://www.npmjs.com/package/env-sanitizer)
-[![Known Vulnerabilities](https://snyk.io//test/github/evanshortiss/env-sanitizer/badge.svg?targetFile=package.json)](https://snyk.io//test/github/evanshortiss/env-sanitizer?targetFile=package.json)
+[![Known Vulnerabilities](https://snyk.io//test/github/kishan-ghetiya/env-sanitizer/badge.svg?targetFile=package.json)](https://snyk.io//test/github/kishan-ghetiya/env-sanitizer?targetFile=package.json)
 [![License](https://badgen.net/npm/license/env-sanitizer)](https://opensource.org/licenses/MIT)
 
 A library to validate, sanitize, and safely load `.env` variables in your Node.js application. Supports TypeScript!
