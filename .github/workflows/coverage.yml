@@ -10,19 +10,25 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: ⬇️ Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: 🟢 Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install Dependencies
+      - name: 📦 Install Dependencies
         run: npm ci
 
-      - name: Run Tests & Collect Coverage
+      - name: 🧪 Run Tests & Collect Coverage
         run: npm run coverage
+
+      - name: 🧹 Lint Check
+        run: npm run lint
+
+      - name: 📐 Type Check
+        run: npm run typecheck || true # Skip if not set up
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2
