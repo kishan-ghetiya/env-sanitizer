@@ -47,11 +47,12 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
       finalValue = rule.default;
     } else {
       switch (rule.type) {
-        case "string":
+        case "string": {
           finalValue = rawValue;
           break;
+        }
 
-        case "number":
+        case "number": {
           const parsedNumber = Number(rawValue);
           if (isNaN(parsedNumber)) {
             throw new Error(
@@ -60,12 +61,14 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
           }
           finalValue = parsedNumber;
           break;
+        }
 
-        case "boolean":
+        case "boolean": {
           finalValue = ["true", "1", "yes"].includes(rawValue.toLowerCase());
           break;
+        }
 
-        case "json":
+        case "json": {
           try {
             finalValue = JSON.parse(rawValue);
           } catch {
@@ -74,12 +77,14 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
             );
           }
           break;
+        }
 
-        case "array":
+        case "array": {
           finalValue = rawValue.split(",").map((item) => item.trim());
           break;
+        }
 
-        case "date":
+        case "date": {
           finalValue = new Date(rawValue);
           if (isNaN(finalValue.getTime())) {
             throw new Error(
@@ -87,8 +92,9 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
             );
           }
           break;
+        }
 
-        case "object":
+        case "object": {
           try {
             finalValue = JSON.parse(rawValue);
           } catch {
@@ -97,8 +103,9 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
             );
           }
           break;
+        }
 
-        case "url":
+        case "url": {
           try {
             finalValue = new URL(rawValue);
           } catch {
@@ -107,8 +114,9 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
             );
           }
           break;
+        }
 
-        case "email":
+        case "email": {
           const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
           if (!emailRegex.test(rawValue)) {
             throw new Error(
@@ -117,8 +125,9 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
           }
           finalValue = rawValue;
           break;
+        }
 
-        case "uuid":
+        case "uuid": {
           const uuidRegex =
             /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
           if (!uuidRegex.test(rawValue)) {
@@ -128,8 +137,9 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
           }
           finalValue = rawValue;
           break;
+        }
 
-        case "regex":
+        case "regex": {
           try {
             finalValue = new RegExp(rawValue);
           } catch {
@@ -140,13 +150,15 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
             );
           }
           break;
+        }
 
-        case "bigint":
+        case "bigint": {
           const parsedBigInt = BigInt(rawValue);
           finalValue = parsedBigInt;
           break;
+        }
 
-        case "hex":
+        case "hex": {
           const parsedHex = parseInt(rawValue, 16);
           if (isNaN(parsedHex)) {
             throw new Error(
@@ -155,10 +167,12 @@ export function sanitizeEnv<T>(schema: EnvSchema<T>): T {
           }
           finalValue = parsedHex;
           break;
+        }
 
-        case "csv":
+        case "csv": {
           finalValue = rawValue.split(",").map((item) => item.trim());
           break;
+        }
 
         default:
           throw new Error(`Unsupported type for env variable: ${String(key)}`);

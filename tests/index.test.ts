@@ -196,7 +196,7 @@ describe("sanitizeEnv", () => {
   it("should parse BigInt correctly", () => {
     process.env.BIG_INT_VAR = "9007199254740991";
 
-    const schema: EnvSchema<{ BIG_INT_VAR: BigInt }> = {
+    const schema: EnvSchema<{ BIG_INT_VAR: bigint }> = {
       BIG_INT_VAR: { type: "bigint" as EnvType, required: true },
     };
 
